@@ -1,0 +1,84 @@
+#' Return a commentary snippet for one or more decimal values.
+#' Formats the numbers as a percentage and provides simple up/down commentary
+#'
+#' @name percent_change
+#' @export
+#'
+#' @param x a vector of percentage values, as a decimal
+#' E.g. 10\% would be passed as 0.1.
+#' @param description code of descriptive words used in commentary.
+#' Defaults to "up"; up/down/unchanged.
+#' @param ... additional arguments to pass to the scales::percent function
+#'
+#' @importFrom scales percent
+#' @importFrom stringr str_trim
+#' @importFrom purrr map
+#'
+#' @return Returns a brief commentary
+#' (including the figure for increases or decreases)
+#' as a string
+#'
+percent_change <- function(x, description = "up", ...) {
+  if (!description %in% words$code) {
+    stop(
+      paste0(
+        "Description identifier not found!",
+        "Possible description codes are ",
+        paste(words$code, collapse = ", "),
+        "Run show_format() for more details."
+      )
+    )
+  }
+
+  ## pick the words we're using
+  words <- words[words$code == description, ]
+
+  # Stop if not a number
+  if (!is.numeric(x)) {
+    stop("Values provided are not numeric")
+  }
+
+  ## If there's only one value, just do single change on it
+  if (length(x) == 1) {
+    single_percent(x, description = description, ...)
+  } else {
+
+    ## If all numbers are the same, we're only doing one lot of commentary
+    if (all(x >= 0.01)) {
+      comm <- paste(
+        words$up_pre,
+        smart_paste(
+          scales::percent(x, ...)
+        ),
+        words$up_post,
+        "respectively"
+      )
+    } else if (all(x <= - 0.01)) {
+      comm <- paste(
+        words$down_pre,
+        smart_paste(
+          scales::percent(
+            abs(x), ...
+          )
+        ),
+        words$down_post,
+        "respectively"
+      )
+      # Else just crack out two or more percent_change statements
+    } else if (all(!(x > 0.01 | x <= - 0.01))) {
+      comm <- paste("both", words$same)
+    } else {
+      comm <- paste(smart_paste(purrr::map(x,
+        single_percent,
+        description = description,
+        ...
+      )), "respectively")
+    }
+
+    return(
+      stringr::str_trim(
+        gsub("  ", " ", comm)
+      )
+    )
+  }
+}

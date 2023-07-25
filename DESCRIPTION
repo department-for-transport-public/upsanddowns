@@ -11,7 +11,7 @@ LazyData: true
 Depends: 
     R (>= 2.10)
 RoxygenNote: 7.2.1
-Imports: stringr, scales, purrr, dftutils, dplyr
+Imports: stringr, scales, purrr, dftutils, dplyr, lubridate
 Remotes:
     department-for-transport-public/dftutils
 Suggests: 

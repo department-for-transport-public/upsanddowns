@@ -65,7 +65,7 @@ number_change <- function(x, description = "up", unchanged_limit = 100, ...) {
         "respectively"
       )
       # Else just crack out two or more percent_change statements
-    } else if (all(!(x > 0.01 | x <= - 0.01))) {
+    } else if (all(!(x > unchanged_limit | x <= - unchanged_limit))) {
       comm <- paste("both", words$same)
     } else {
       comm <- paste(smart_paste(purrr::map(x,

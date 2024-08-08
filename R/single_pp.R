@@ -10,6 +10,8 @@
 #' Defaults to "up"; up/down/unchanged.
 #' @param abbr logical, whether you would like the units abbreviated to pp.
 #' Defaults to TRUE.
+#' @param unchanged_limit numeric, the value below which you consider
+#' the parameter to not represent a change in either direction. Defaults to 0.01.
 #' @param ... additional arguments to pass to the round function
 #'
 #' @importFrom stringr str_trim
@@ -18,7 +20,7 @@
 #' @return Returns a brief commentary (including the figure
 #' for increases or decreases) as a string
 #'
-single_pp <- function(x, description = "up", abbr = TRUE, ...) {
+single_pp <- function(x, description = "up", abbr = TRUE, unchanged_limit = 0.01, ...) {
 
   ## pick the words we're using
   words <- words[words$code == description, ]
@@ -38,7 +40,7 @@ single_pp <- function(x, description = "up", abbr = TRUE, ...) {
   }
 
 
-  if (x >= 0.01) {
+  if (x >= unchanged_limit) {
     comm <- paste(
       words$up_pre,
       paste0(
@@ -46,7 +48,7 @@ single_pp <- function(x, description = "up", abbr = TRUE, ...) {
       ),
       words$up_post
     )
-  } else if (x <= - 0.01) {
+  } else if (x <= - unchanged_limit) {
     comm <- paste(
       words$down_pre,
       paste0(abs(

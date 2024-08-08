@@ -11,6 +11,8 @@
 #' Defaults to "up"; up/down/unchanged.
 #' @param abbr logical, whether you would like the units abbreviated to pp.
 #' Defaults to TRUE.
+#' @param unchanged_limit numeric, the value below which you consider
+#' the parameter to not represent a change in either direction. Defaults to 0.01.
 #' @param ... additional arguments to pass to the scales::percent function
 #'
 #' @importFrom stringr str_trim
@@ -20,7 +22,7 @@
 #' @return Returns a brief commentary (including the figure for
 #' increases or decreases) as a string
 #'
-pp_change <- function(x, description = "up", abbr = TRUE, ...) {
+pp_change <- function(x, description = "up", abbr = TRUE, unchanged_limit = 0.01, ...) {
   if (!description %in% words$code) {
     stop(
       paste0(
@@ -47,11 +49,15 @@ pp_change <- function(x, description = "up", abbr = TRUE, ...) {
 
   ## If there's only one value, just do single change on it
   if (length(x) == 1) {
-    single_pp(x, description = description, abbr = abbr, ...)
+    single_pp(x, description = description, 
+              abbr = abbr,
+              unchanged_limit = unchanged_limit,
+              ...
+              )
   } else {
 
     ## If all numbers are the same, we're only doing one lot of commentary
-    if (all(x >= 0.01)) {
+    if (all(x >= unchanged_limit)) {
       comm <- paste(
         words$up_pre,
         smart_paste(
@@ -62,7 +68,7 @@ pp_change <- function(x, description = "up", abbr = TRUE, ...) {
         words$up_post,
         "respectively"
       )
-    } else if (all(x <= - 0.01)) {
+    } else if (all(x <= - unchanged_limit)) {
       comm <- paste(
         words$down_pre,
         smart_paste(
@@ -74,7 +80,7 @@ pp_change <- function(x, description = "up", abbr = TRUE, ...) {
         "respectively"
       )
       # Else just crack out two or more percent_change statements
-    } else if (all(!(x > 0.01 | x <= - 0.01))) {
+    } else if (all(!(x > unchanged_limit | x <= - unchanged_limit))) {
       comm <- paste("both", words$same)
     } else {
       comm <- paste(smart_paste(purrr::map(x,

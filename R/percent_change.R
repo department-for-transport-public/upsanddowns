@@ -42,7 +42,10 @@ percent_change <- function(x, description = "up", unchanged_limit = 0.01, ...) {
 
   ## If there's only one value, just do single change on it
   if (length(x) == 1) {
-    single_percent(x, description = description, ...)
+    single_percent(x, 
+                   description = description, 
+                   unchanged_limit = unchanged_limit, ...
+                   )
   } else {
 
     ## If all numbers are the same, we're only doing one lot of commentary

@@ -24,10 +24,10 @@ percent_change <- function(x, description = "up", unchanged_limit = 0.01, ...) {
   if (!description %in% words$code) {
     stop(
       paste0(
-        "Description identifier not found!",
-        "Possible description codes are ",
-        paste(words$code, collapse = ", "),
-        "Run show_format() for more details."
+        "Description identifier not found! ",
+        "Permitted description codes are ",
+        paste(words$code, collapse = ", "), ".",
+        " Run show_format() for more details."
       )
     )
   }

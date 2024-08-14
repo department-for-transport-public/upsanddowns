@@ -1,17 +1,19 @@
 Package: upsanddowns
 Type: Package
 Title: Turns Data into Short Form Commentary for RMarkdown
-Version: 0.1.0
-Authors@R: person("Francesca", "Bryden", , "francesca.bryden@dft.gov.uk", role = c("aut", "cre"))
+Version: 0.2.0
+Authors@R: c(
+person("Francesca", "Bryden", , "francesca.bryden@dft.gov.uk", role = c("aut", "cre")),
+person("Harry", "Allen", , "harry.allen@dft.gov.uk", role = c("aut")))
 Description: Designed for use within RMarkdown commentary, this package provides simple commentary for percentages, percentage points and numerical values.
     Functions are highly customisable, allowing users to select a choice of descriptive words, rounding, and numerical formatting.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends: 
-    R (>= 2.10)
+    R (>= 2.10), dftutils, stringr
 RoxygenNote: 7.3.2
-Imports: stringr, scales, purrr, dftutils, dplyr, lubridate
+Imports: scales, purrr, dplyr, lubridate
 Remotes:
     department-for-transport-public/dftutils
 Suggests: 

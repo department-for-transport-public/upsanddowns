@@ -42,3 +42,8 @@ test_that("changing unchanged limit works", {
   expect_equal(number_change(-12, unchanged_limit = 15), "unchanged")
   expect_equal(number_change(c(-12, 5000), unchanged_limit = 10), "down 12 and up 5,000 respectively")
 })
+
+test_that("multiple unchanged values changes wording", {
+  expect_equal(number_change(c(40, 20)), "both unchanged")
+  expect_equal(number_change(c(10, 43, 87)), "all unchanged")
+})

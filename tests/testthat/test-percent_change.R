@@ -51,3 +51,8 @@ test_that("changing unchanged limit works", {
   expect_equal(percent_change(c(0.12, -0.03), unchanged_limit = 0.1), "up 12% and unchanged respectively")
   expect_equal(percent_change(c(0.25, -0.34), unchanged_limit = 0.15), "up 25% and down 34% respectively")
 })
+
+test_that("multiple unchanged values changes wording", {
+  expect_equal(percent_change(c(0.005, 0.002)), "both unchanged")
+  expect_equal(percent_change(c(0.005, 0.009, 0.007)), "all unchanged")
+})

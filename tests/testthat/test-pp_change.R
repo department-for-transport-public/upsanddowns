@@ -58,4 +58,7 @@ test_that("changing unchanged limit works", {
   expect_equal(pp_change(c(0.42, -0.28), unchanged_limit = 0.1), "up 42pp and down 28pp respectively")
 })
 
-
+test_that("multiple unchanged values changes wording", {
+  expect_equal(pp_change(c(0.008, 0.001)), "both unchanged")
+  expect_equal(pp_change(c(0.006, 0.003, 0.002)), "all unchanged")
+})

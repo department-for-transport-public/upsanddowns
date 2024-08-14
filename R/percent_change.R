@@ -76,6 +76,7 @@ percent_change <- function(x, description = "up", unchanged_limit = 0.01, ...) {
       comm <- paste(smart_paste(purrr::map(x,
         single_percent,
         description = description,
+        unchanged_limit = unchanged_limit,
         ...
       )), "respectively")
     }

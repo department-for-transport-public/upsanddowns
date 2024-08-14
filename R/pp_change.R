@@ -86,6 +86,7 @@ pp_change <- function(x, description = "up", abbr = TRUE, unchanged_limit = 0.01
       comm <- paste(smart_paste(purrr::map(x,
         single_pp,
         description = description,
+        unchanged_limit = unchanged_limit,
         abbr = abbr,
         ...
       )), "respectively")

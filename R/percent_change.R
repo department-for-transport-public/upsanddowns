@@ -8,6 +8,8 @@
 #' E.g. 10\% would be passed as 0.1.
 #' @param description code of descriptive words used in commentary.
 #' Defaults to "up"; up/down/unchanged.
+#' @param unchanged_limit numeric, the value below which you consider
+#' the parameter to not represent a change in either direction. Defaults to 0.01 (equal to 1\%).
 #' @param ... additional arguments to pass to the scales::percent function
 #'
 #' @importFrom scales percent
@@ -18,14 +20,14 @@
 #' (including the figure for increases or decreases)
 #' as a string
 #'
-percent_change <- function(x, description = "up", ...) {
+percent_change <- function(x, description = "up", unchanged_limit = 0.01, ...) {
   if (!description %in% words$code) {
     stop(
       paste0(
-        "Description identifier not found!",
-        "Possible description codes are ",
-        paste(words$code, collapse = ", "),
-        "Run show_format() for more details."
+        "Description identifier not found! ",
+        "Permitted description codes are ",
+        paste(words$code, collapse = ", "), ".",
+        " Run show_format() for more details."
       )
     )
   }
@@ -40,11 +42,14 @@ percent_change <- function(x, description = "up", ...) {
 
   ## If there's only one value, just do single change on it
   if (length(x) == 1) {
-    single_percent(x, description = description, ...)
+    single_percent(x, 
+                   description = description, 
+                   unchanged_limit = unchanged_limit, ...
+                   )
   } else {
 
     ## If all numbers are the same, we're only doing one lot of commentary
-    if (all(x >= 0.01)) {
+    if (all(x >= unchanged_limit)) {
       comm <- paste(
         words$up_pre,
         smart_paste(
@@ -53,7 +58,7 @@ percent_change <- function(x, description = "up", ...) {
         words$up_post,
         "respectively"
       )
-    } else if (all(x <= - 0.01)) {
+    } else if (all(x <= - unchanged_limit)) {
       comm <- paste(
         words$down_pre,
         smart_paste(
@@ -65,12 +70,15 @@ percent_change <- function(x, description = "up", ...) {
         "respectively"
       )
       # Else just crack out two or more percent_change statements
-    } else if (all(!(x > 0.01 | x <= - 0.01))) {
+    } else if (all(!(x > unchanged_limit | x <= - unchanged_limit)) & length(x) > 2) {
+      comm <- paste("all", words$same)
+    } else if (all(!(x > unchanged_limit | x <= - unchanged_limit)) & length(x) == 2) {
       comm <- paste("both", words$same)
     } else {
       comm <- paste(smart_paste(purrr::map(x,
         single_percent,
         description = description,
+        unchanged_limit = unchanged_limit,
         ...
       )), "respectively")
     }

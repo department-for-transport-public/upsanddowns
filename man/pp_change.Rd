@@ -6,7 +6,7 @@
 Formats the numbers as percentage points and provides
 simple up/down commentary}
 \usage{
-pp_change(x, description = "up", abbr = TRUE, ...)
+pp_change(x, description = "up", abbr = TRUE, unchanged_limit = 0.01, ...)
 }
 \arguments{
 \item{x}{a vector of percentage values, as a decimal
@@ -17,6 +17,9 @@ Defaults to "up"; up/down/unchanged.}
 
 \item{abbr}{logical, whether you would like the units abbreviated to pp.
 Defaults to TRUE.}
+
+\item{unchanged_limit}{numeric, the value below which you consider
+the parameter to not represent a change in either direction. Defaults to 0.01 (equal to 1pp).}
 
 \item{...}{additional arguments to pass to the scales::percent function}
 }

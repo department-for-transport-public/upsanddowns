@@ -7,6 +7,8 @@
 #' E.g. 10\% would be passed as 0.1.
 #' @param description code of descriptive words used in commentary.
 #' Defaults to "up"; up/down/unchanged.
+#' @param unchanged_limit numeric, the value below which you consider
+#' the parameter to not represent a change in either direction. Defaults to 0.01.
 #' @param ... additional arguments to pass to the scales::percent function
 #'
 #' @importFrom scales percent
@@ -15,7 +17,7 @@
 #' @return Returns a brief commentary (including the figure for
 #' increases or decreases) as a string
 #'
-single_percent <- function(x, description = "up", ...) {
+single_percent <- function(x, description = "up", unchanged_limit, ...) {
 
   ## pick the words we're using
   words <- words[words$code == description, ]
@@ -25,13 +27,13 @@ single_percent <- function(x, description = "up", ...) {
     stop("Value provided is not numeric")
   }
 
-  if (x >= 0.01) {
+  if (x >= unchanged_limit) {
     comm <- paste(
       words$up_pre,
       scales::percent(x, ...),
       words$up_post
     )
-  } else if (x <= - 0.01) {
+  } else if (x <= - unchanged_limit) {
     comm <- paste(
       words$down_pre,
       scales::percent(abs(x), ...),

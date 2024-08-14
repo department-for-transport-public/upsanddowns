@@ -6,7 +6,7 @@
 Formats the number as a percentage point difference
 and provides simple up/down commentary}
 \usage{
-single_pp(x, description = "up", abbr = TRUE, ...)
+single_pp(x, description = "up", abbr = TRUE, unchanged_limit, ...)
 }
 \arguments{
 \item{x}{a numeric value, as a decimal value.
@@ -17,6 +17,9 @@ Defaults to "up"; up/down/unchanged.}
 
 \item{abbr}{logical, whether you would like the units abbreviated to pp.
 Defaults to TRUE.}
+
+\item{unchanged_limit}{numeric, the value below which you consider
+the parameter to not represent a change in either direction. Defaults to 0.01.}
 
 \item{...}{additional arguments to pass to the round function}
 }

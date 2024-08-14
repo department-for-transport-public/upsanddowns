@@ -28,9 +28,8 @@ You can choose which descriptor words you would like to use by making use of the
 Additional arguments for the three functions include:
 
 * `percent_change`: `...` for any additional arguments to be passed to the scales::percent function. 
-* `pp_change`: `abbr` to indicate whether you'd like changes recorded as "percentage points" or "pp". `...` for any additional arguments to be passed to the round function. 
-* `number_change`: `unchanged_limit` to set the limit in either direction for what constitutes "no change" (defaults to 100). `...` for any additional arguments to be passed to the scales::comma function. 
-
+* `pp_change`: `abbr` to indicate whether you'd like changes recorded as "percentage points" or "pp". 
+* All functions: `unchanged_limit` to set the limit in either direction for what constitutes "no change". 
 ### Top values in a dataset
 
 The package also has two different functions designed to describe the top *n* number of values in a dataset (containing values and names for those values), with each function returning a slightly different description based on the same data.

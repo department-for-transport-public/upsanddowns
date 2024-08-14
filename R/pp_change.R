@@ -80,7 +80,9 @@ pp_change <- function(x, description = "up", abbr = TRUE, unchanged_limit = 0.01
         "respectively"
       )
       # Else just crack out two or more percent_change statements
-    } else if (all(!(x > unchanged_limit | x <= - unchanged_limit))) {
+    } else if (all(!(x > unchanged_limit | x <= - unchanged_limit)) & length(x) > 2) {
+      comm <- paste("all", words$same)
+    } else if (all(!(x > unchanged_limit | x <= - unchanged_limit)) & length(x) == 2) {
       comm <- paste("both", words$same)
     } else {
       comm <- paste(smart_paste(purrr::map(x,

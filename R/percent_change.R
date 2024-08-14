@@ -9,7 +9,7 @@
 #' @param description code of descriptive words used in commentary.
 #' Defaults to "up"; up/down/unchanged.
 #' @param unchanged_limit numeric, the value below which you consider
-#' the parameter to not represent a change in either direction. Defaults to 0.01.
+#' the parameter to not represent a change in either direction. Defaults to 0.01 (equal to 1%).
 #' @param ... additional arguments to pass to the scales::percent function
 #'
 #' @importFrom scales percent

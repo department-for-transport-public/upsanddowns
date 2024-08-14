@@ -12,7 +12,7 @@
 #' @param abbr logical, whether you would like the units abbreviated to pp.
 #' Defaults to TRUE.
 #' @param unchanged_limit numeric, the value below which you consider
-#' the parameter to not represent a change in either direction. Defaults to 0.01.
+#' the parameter to not represent a change in either direction. Defaults to 0.01 (equal to 1pp).
 #' @param ... additional arguments to pass to the scales::percent function
 #'
 #' @importFrom stringr str_trim

@@ -19,7 +19,7 @@ Defaults to "up"; up/down/unchanged.}
 Defaults to TRUE.}
 
 \item{unchanged_limit}{numeric, the value below which you consider
-the parameter to not represent a change in either direction. Defaults to 0.01.}
+the parameter to not represent a change in either direction. Defaults to 0.01 (equal to 1pp).}
 
 \item{...}{additional arguments to pass to the scales::percent function}
 }

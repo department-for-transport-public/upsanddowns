@@ -5,7 +5,7 @@
 \title{Return a commentary snippet for any decimal value.
 Formats the number as a percentage and provides simple up/down commentary}
 \usage{
-single_percent(x, description = "up", unchanged_limit = 0.01, ...)
+single_percent(x, description = "up", unchanged_limit, ...)
 }
 \arguments{
 \item{x}{a numeric value, as a decimal value.

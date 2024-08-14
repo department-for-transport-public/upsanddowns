@@ -6,7 +6,7 @@
 Formats the number as a percentage point difference
 and provides simple up/down commentary}
 \usage{
-single_pp(x, description = "up", abbr = TRUE, unchanged_limit = 0.01, ...)
+single_pp(x, description = "up", abbr = TRUE, unchanged_limit, ...)
 }
 \arguments{
 \item{x}{a numeric value, as a decimal value.

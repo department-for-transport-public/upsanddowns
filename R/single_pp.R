@@ -20,7 +20,7 @@
 #' @return Returns a brief commentary (including the figure
 #' for increases or decreases) as a string
 #'
-single_pp <- function(x, description = "up", abbr = TRUE, unchanged_limit = 0.01, ...) {
+single_pp <- function(x, description = "up", abbr = TRUE, unchanged_limit, ...) {
 
   ## pick the words we're using
   words <- words[words$code == description, ]

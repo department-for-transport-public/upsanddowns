@@ -17,7 +17,7 @@
 #' @return Returns a brief commentary (including the figure for
 #' increases or decreases) as a string
 #'
-single_percent <- function(x, description = "up", unchanged_limit = 0.01, ...) {
+single_percent <- function(x, description = "up", unchanged_limit, ...) {
 
   ## pick the words we're using
   words <- words[words$code == description, ]

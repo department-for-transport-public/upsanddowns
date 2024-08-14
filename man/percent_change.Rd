@@ -15,7 +15,7 @@ E.g. 10\% would be passed as 0.1.}
 Defaults to "up"; up/down/unchanged.}
 
 \item{unchanged_limit}{numeric, the value below which you consider
-the parameter to not represent a change in either direction. Defaults to 0.01.}
+the parameter to not represent a change in either direction. Defaults to 0.01 (equal to 1\%).}
 
 \item{...}{additional arguments to pass to the scales::percent function}
 }

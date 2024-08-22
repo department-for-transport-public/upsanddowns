@@ -1,7 +1,7 @@
 Package: upsanddowns
 Type: Package
 Title: Turns Data into Short Form Commentary for RMarkdown
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: c(
   person("Francesca", "Bryden", , "francesca.bryden@dft.gov.uk", role = c("aut", "cre")),
   person("Harry", "Allen", , "harry.allen@dft.gov.uk", role = c("aut")))
@@ -11,7 +11,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends: 
-    R (>= 2.10), dftutils, stringr
+    R (>= 2.10), dftutils, stringr, lubridate
 RoxygenNote: 7.3.2
 Imports: scales, purrr, dplyr
 Remotes:

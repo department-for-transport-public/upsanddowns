@@ -11,9 +11,9 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends: 
-    R (>= 2.10), dftutils, stringr, lubridate
+    R (>= 2.10), dftutils, stringr
 RoxygenNote: 7.3.2
-Imports: scales, purrr, dplyr
+Imports: scales, purrr, dplyr, lubridate
 Remotes:
     department-for-transport-public/dftutils
 Suggests: 

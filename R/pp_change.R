@@ -16,7 +16,6 @@
 #' @param ... additional arguments to pass to the scales::percent function
 #'
 #' @importFrom stringr str_trim
-#' @importFrom dftutils round
 #' @importFrom purrr map
 #'
 #' @return Returns a brief commentary (including the figure for
@@ -50,7 +49,7 @@ pp_change <- function(x, description = "up", abbr = TRUE, unchanged_limit = 0.01
 
   ## If there's only one value, just do single change on it
   if (length(x) == 1) {
-    single_pp(x, description = description, 
+    single_pp(x, description = description,
               abbr = abbr,
               unchanged_limit = unchanged_limit,
               ...
@@ -63,7 +62,7 @@ pp_change <- function(x, description = "up", abbr = TRUE, unchanged_limit = 0.01
         words$up_pre,
         smart_paste(
           paste0(
-            dftutils::round(x * 100, ...), unit
+            round(x * 100, ...), unit
           )
         ),
         words$up_post,
@@ -74,7 +73,7 @@ pp_change <- function(x, description = "up", abbr = TRUE, unchanged_limit = 0.01
         words$down_pre,
         smart_paste(
           paste0(abs(
-            dftutils::round(x * 100, ...)
+            round(x * 100, ...)
           ), unit)
         ),
         words$down_post,

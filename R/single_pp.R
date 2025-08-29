@@ -15,7 +15,6 @@
 #' @param ... additional arguments to pass to the round function
 #'
 #' @importFrom stringr str_trim
-#' @importFrom dftutils round
 #'
 #' @return Returns a brief commentary (including the figure
 #' for increases or decreases) as a string
@@ -44,7 +43,7 @@ single_pp <- function(x, description = "up", abbr = TRUE, unchanged_limit, ...) 
     comm <- paste(
       words$up_pre,
       paste0(
-        dftutils::round(x * 100, ...), unit
+        round(x * 100, ...), unit
       ),
       words$up_post
     )
@@ -52,7 +51,7 @@ single_pp <- function(x, description = "up", abbr = TRUE, unchanged_limit, ...) 
     comm <- paste(
       words$down_pre,
       paste0(abs(
-        dftutils::round(x * 100, ...)
+        round(x * 100, ...)
       ), unit),
       words$down_post
     )
